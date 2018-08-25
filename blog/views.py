@@ -12,6 +12,9 @@ def index(request):
     post_list = Post.objects.all().order_by('-create_time')
     # return render(request, 'blog/index.html',
     #               context={'title': '我的博客', 'welcome': '欢迎来到我的博客网站'})
+
+    # 查询对应的
+    get_comments(post_list)
     return render(request, 'blog/index.html', context={'post_list': post_list})
 
 
@@ -20,7 +23,6 @@ def detail(request, pk):
     post.body = markdown.markdown(post.body, extensions=['markdown.extensions.extra',
                                                          'markdown.extensions.codehilite',
                                                          'markdown.extensions.toc', ])
-
     form = CommentForm()
     # 获取这篇 post 下的全部评论
     comments_list = post.comments_set.all()
@@ -30,16 +32,25 @@ def detail(request, pk):
 
 def archives(request, year, month):
     post_list = Post.objects.filter(create_time__month=month, create_time__year=year)
+    get_comments(post_list)
     return render(request, 'blog/index.html', context={'post_list': post_list})
 
 
 def category(request, pk):
     cate = get_object_or_404(Category, pk=pk)
     post_list = Post.objects.filter(category=cate)
+    get_comments(post_list)
     return render(request, 'blog/index.html', context={'post_list': post_list})
 
 
 def tag(request, pk):
     t = get_object_or_404(Tag, pk=pk)
     post_list = Post.objects.filter(tag=t)
+    get_comments(post_list)
     return render(request, 'blog/index.html', context={'post_list': post_list})
+
+
+# 获取对应的 评论数
+def get_comments(post_list):
+    for item in post_list:
+        item.countComments = len(item.comments_set.all())

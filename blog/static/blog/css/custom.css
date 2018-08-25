@@ -106,7 +106,7 @@ img {
 #site-header {
     background-color: #FFF;
     padding: 25px 20px;
-    margin-bottom: 40px;
+    /*margin-bottom: 40px;*/
     border-bottom: 1px solid #e7e7e7;
 }
 
@@ -219,18 +219,22 @@ img {
 }
 
 .entry-title {
-    text-align: center;
+    text-align: left;
     font-size: 1.9em;
-    margin-bottom: 20px;
     line-height: 1.6;
-    padding: 10px 20px 0;
+    padding: 10px 0px 0;
+}
+
+.entry-header {
+    background: #f1f1f1;
+    padding-left: 10px;
 }
 
 .entry-meta {
-    text-align: center;
+    text-align: left;
     color: #DDDDDD;
-    font-size: 13px;
-    margin-bottom: 30px;
+    font-size: 15px;
+    padding-bottom: 10px;
 }
 
 .entry-content {
@@ -473,7 +477,7 @@ img {
 
 #header-search-box {
     position: absolute;
-    right: 38px;
+    left: 340px;
     top: 8px;
 }
 
@@ -783,8 +787,8 @@ img {
     }
 
     #header-search-box {
-        position: absolute;
         right: 20px;
+        float: left;
     }
 }
 
